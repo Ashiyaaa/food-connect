@@ -34,19 +34,17 @@ router.get("/all-donations", isLoggedin, async function (req, res, next) {
   res.render("allDonations", { food: food, user: user });
 });
 
+router.get("/terms", isLoggedin, async function (req, res, next) {
+  const user = await userModel.findOne({ username: req.session.passport.user });
+  await user.populate("donations");
+  res.render("terms", { user: user });
+});
 
-
-
-router.get('/analytics', function(req, res){
-  res.render('analytics');
-})
-=======
 router.get("/help", isLoggedin, async function (req, res, next) {
   const user = await userModel.findOne({ username: req.session.passport.user });
   await user.populate("donations");
   res.render("help", { user: user });
 });
->>>>>>> 7db75fa38588b718fdfae9ddcfa94ebb68ff13d4
 
 router.get("/reports", isLoggedin, async function (req, res, next) {
   const user = await userModel.findOne({ username: req.session.passport.user });
@@ -178,6 +176,17 @@ router.post("/submit-review/:id", isLoggedin, async function (req, res, next) {
 router.get("/profile", isLoggedin, async function (req, res, next) {
   const user = await userModel.findOne({ username: req.session.passport.user });
   res.render("profile", { user: user });
+});
+
+router.get("/user/:id", isLoggedin, async function (req, res, next) {
+  const id = req.params.id;
+  console.log(id);
+  const user = await userModel.findOne({ username: req.session.passport.user });
+  const singleuser = await userModel.findOne({
+  _id: id,
+  });
+
+  res.render("user", {user: user,singleuser:singleuser });
 });
 
 router.post("/register", function (req, res) {
