@@ -37,7 +37,37 @@ const userSchema = new mongoose.Schema({
   donations: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Food'
-  }]
+  }],
+  reviews: {
+    freshness : {
+      type: String,
+      default:"No review"
+    },
+    safetyAndHygiene: {
+      type: String,
+      default:"No review"
+    },
+    variety: {
+      type: String,
+      default:"No review"
+    },
+    taste: {
+      type: String,
+      default:"No review"
+    },
+    portionSize: {
+      type: String,
+      default:"No review"
+    },
+    rating: {
+      type: Number,
+      default: 0
+    },
+    review: {
+      type: String,
+      default: "No review"
+    }
+  }
 })
 
 userSchema.plugin(plm);

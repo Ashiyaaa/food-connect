@@ -8,9 +8,9 @@ const foodSchema = new mongoose.Schema({
   date: {
     type: Date
   },
-  isAccepted: {
-    type: Boolean,
-    default: false
+  status: {
+    type: String,
+    default: "Pending"
   },
   foodQuantity: {
     type: Number,
@@ -31,8 +31,11 @@ const foodSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  isNotified: {
+    type: Boolean,
+    default: false
+  }
 });
 
-// foodSchema.plugin(plm);
 
 module.exports = mongoose.model("Food", foodSchema);
